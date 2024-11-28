@@ -71,17 +71,17 @@ export function Marketplace() {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Voice Marketplace</h1>
-        <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 md:gap-0">
+        <h1 className="text-3xl font-bold w-full md:w-auto">Voice Marketplace</h1>
+        <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
           <Input
             placeholder="Search voices..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-64"
+            className="w-full md:w-64"
           />
           <Select value={voiceType} onValueChange={setVoiceType}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger>
               <SelectValue placeholder="Voice type" />
             </SelectTrigger>
             <SelectContent>
@@ -99,9 +99,9 @@ export function Marketplace() {
           No voices found matching your criteria
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredListings.map((listing) => (
-            <Card key={listing.id}>
+            <Card key={listing.id} className="w-full">
               <CardHeader>
                 <CardTitle>{listing.voice?.name}</CardTitle>
                 <CardDescription>{listing.description}</CardDescription>

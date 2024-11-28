@@ -76,13 +76,13 @@ export function LandingPage() {
               <Zap className="w-4 h-4 text-purple-400" />
               <span className="text-sm text-purple-200">The Future of AI Voice Technology</span>
             </div>
-            <h1 className="text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500">
               Speaker
             </h1>
-            <p className="text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
               Create emotionally intelligent AI voices that sound truly human. Clone, customize, and bring your voice to life.
             </p>
-            <div className="flex gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
                 className="bg-purple-600 hover:bg-purple-700"
@@ -100,7 +100,7 @@ export function LandingPage() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-20">
           <div className="bg-gray-800/50 p-8 rounded-xl backdrop-blur-sm">
             <div className="bg-purple-600/20 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
               <Brain className="w-7 h-7 text-purple-400" />
@@ -133,7 +133,7 @@ export function LandingPage() {
         </div>
 
         {/* Stats Section */}
-        <div className="py-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="py-20 grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
           <div>
             <div className="text-4xl font-bold text-purple-400 mb-2">99.9%</div>
             <div className="text-gray-400">Accuracy Rate</div>
@@ -155,11 +155,11 @@ export function LandingPage() {
         {/* Pricing Section */}
         <div className="py-20">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-xl text-gray-400">Choose the perfect plan for your voice creation needs</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+            <p className="text-lg md:text-xl text-gray-400">Choose the perfect plan for your voice creation needs</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {pricingPlans.map((plan) => (
               <div
                 key={plan.name}
@@ -175,7 +175,7 @@ export function LandingPage() {
                 <div className="mb-6">
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">{plan.price}</span>
+                    <span className="text-3xl md:text-4xl font-bold">{plan.price}</span>
                     {plan.period && <span className="text-gray-400">{plan.period}</span>}
                   </div>
                   <p className="text-gray-400 mt-2">{plan.description}</p>
@@ -205,8 +205,8 @@ export function LandingPage() {
 
         {/* Final CTA */}
         <div className="text-center py-20">
-          <h2 className="text-4xl font-bold mb-6">Ready to Transform Voice AI?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Voice AI?</h2>
+          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Join thousands of creators using Speaker to bring their voices to life with true emotional intelligence.
           </p>
           <Button 

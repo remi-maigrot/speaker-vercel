@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { Bot, Mic2, Sparkles, Wand2, Zap, Crown, Star, Check, Waves, Brain, Music, Gauge } from "lucide-react";
+import { Zap, Check, Waves, Brain, Music } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 
 export function LandingPage() {

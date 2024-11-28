@@ -29,7 +29,7 @@ export function SettingsPage() {
 
   useEffect(() => {
     const loadPreferences = async () => {
-      if (user) {
+      if (user?.id) { // Ensure user.id is defined
         const userPrefs = await getUserPreferences(user.id);
         if (userPrefs) {
           setPreferences(prev => ({
@@ -74,10 +74,12 @@ export function SettingsPage() {
 
   const handlePreferencesUpdate = async (key: string, value: any) => {
     try {
-      const newPreferences = { ...preferences, [key]: value };
-      setPreferences(newPreferences);
-      await updateUserPreferences(user?.id!, newPreferences);
-      toast.success("Preferences updated");
+      if (user?.id) { // Ensure user.id is defined
+        const newPreferences = { ...preferences, [key]: value };
+        setPreferences(newPreferences);
+        await updateUserPreferences(user.id, newPreferences); // Pass user.id directly
+        toast.success("Preferences updated");
+      }
     } catch (error) {
       toast.error("Failed to update preferences");
     }

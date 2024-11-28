@@ -7,9 +7,8 @@ import { MarketplaceStudio } from '@/components/marketplace-studio';
 import { Button } from '@/components/ui/button';
 import { getUserVoices, deleteVoice } from '@/lib/db';
 import { useAuth } from '@/hooks/use-auth';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, InvalidateQueryFilters } from '@tanstack/react-query';
 import { 
-  LayoutDashboard, 
   Mic2, 
   BarChart3, 
   Settings, 
@@ -41,7 +40,11 @@ export function Dashboard() {
     if (window.confirm('Are you sure you want to delete this voice?')) {
       try {
         await deleteVoice(voiceId);
-        queryClient.invalidateQueries(['voices', user?.id]);
+        if (user?.id) {
+          queryClient.invalidateQueries({
+            queryKey: ['voices', user.id]
+          } as InvalidateQueryFilters);
+        }
         toast.success('Voice deleted successfully');
       } catch (error) {
         toast.error('Failed to delete voice');
@@ -57,7 +60,11 @@ export function Dashboard() {
   ];
 
   const handleVoiceCreated = () => {
-    queryClient.invalidateQueries(['voices', user?.id]);
+    if (user?.id) {
+      queryClient.invalidateQueries({
+        queryKey: ['voices', user.id]
+      } as InvalidateQueryFilters);
+    }
     setShowCreator(false);
   };
 
@@ -112,7 +119,9 @@ export function Dashboard() {
                   className="text-red-500 hover:text-red-600 hover:bg-red-100 dark:hover:bg-red-900"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDeleteVoice(voice.id);
+                    if (voice.id !== undefined) {
+                      handleDeleteVoice(voice.id);
+                    }
                   }}
                 >
                   <Trash2 className="h-4 w-4" />

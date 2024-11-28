@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, InvalidateQueryFilters } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,32 +53,37 @@ export function MarketplaceStudio() {
       toast.error("Please select a voice to publish");
       return;
     }
-
+  
     if (!price || isNaN(Number(price)) || Number(price) <= 0) {
       toast.error("Please enter a valid price");
       return;
     }
-
+  
     if (!description.trim()) {
       toast.error("Please provide a description");
       return;
     }
-
+  
+    if (!user || !user.id) {
+      toast.error("User not found. Please log in.");
+      return;
+    }
+  
     setIsPublishing(true);
     try {
       await publishVoiceToMarketplace(
         selectedVoice.id,
-        user!.id,
+        user.id,  // This is now guaranteed to be a number
         Number(price),
         description.trim()
       );
-
+  
       await Promise.all([
-        queryClient.invalidateQueries(['voices']),
-        queryClient.invalidateQueries(['marketplace-listings']),
+        queryClient.invalidateQueries({ queryKey: ['voices'] } as InvalidateQueryFilters),
+        queryClient.invalidateQueries({ queryKey: ['marketplace-listings'] } as InvalidateQueryFilters),
         refetchVoices()
       ]);
-
+  
       toast.success("Voice published to marketplace successfully!");
       setSelectedVoice(null);
       setPrice("");
@@ -90,6 +95,7 @@ export function MarketplaceStudio() {
       setIsPublishing(false);
     }
   };
+  
 
   if (isLoading) {
     return (

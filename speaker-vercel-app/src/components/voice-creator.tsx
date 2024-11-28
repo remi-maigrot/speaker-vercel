@@ -100,19 +100,25 @@ export function VoiceCreator({ onVoiceCreated }: VoiceCreatorProps) {
       toast.error('Please log in to create a voice');
       return;
     }
-
+  
+    if (typeof user.id !== 'number') {
+      toast.error('Invalid user ID');
+      return;
+    }
+  
     if (!voiceName.trim()) {
       toast.error('Please provide a name for the voice');
       return;
     }
-
+  
     if (!audioBlob) {
       toast.error('Please record, upload, or generate a voice');
       return;
     }
-
+  
     setIsProcessing(true);
     try {
+      // Ensure user.id is passed as a number
       await createVoice(user.id, voiceName.trim(), 'custom', audioBlob);
       toast.success('Voice created successfully');
       setVoiceName('');

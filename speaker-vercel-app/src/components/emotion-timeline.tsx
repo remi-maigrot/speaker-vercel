@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 
@@ -24,6 +23,7 @@ export function EmotionTimeline({
   currentTime,
   onRemoveEmotion
 }: EmotionTimelineProps) {
+  // @ts-ignore
   const [timelineWidth, setTimelineWidth] = useState(0);
 
   useEffect(() => {

@@ -26,9 +26,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => {
     // Load theme preference from database when user logs in
     const loadThemePreference = async () => {
-      if (user) {
+      if (user?.id) {
         const preferences = await getUserPreferences(user.id);
-        if (preferences?.theme) {
+        if (preferences?.theme === "light" || preferences?.theme === "dark" || preferences?.theme === "system") {
           setThemeState(preferences.theme);
         }
       }
@@ -55,7 +55,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     localStorage.setItem("theme", newTheme);
     
     // Update theme in database if user is logged in
-    if (user) {
+    if (user?.id) {
       await updateUserPreferences(user.id, { theme: newTheme });
     }
   };

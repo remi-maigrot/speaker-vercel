@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 import { verifyUser, createUser } from '../lib/db';
 
 interface User {
-  id: number;
+  id?: number;  // Rendre 'id' optionnel
   email: string;
   name: string;
 }
@@ -24,6 +24,10 @@ export const useAuth = create<AuthState>()(
         const user = await verifyUser(email, password);
         if (user) {
           const { password: _, ...userWithoutPassword } = user;
+          // S'assurer que 'id' existe, sinon gérer cette situation
+          if (userWithoutPassword.id === undefined) {
+            throw new Error('L\'ID de l\'utilisateur est manquant');
+          }
           set({ user: userWithoutPassword });
         }
       },
@@ -31,7 +35,7 @@ export const useAuth = create<AuthState>()(
         const userId = await createUser(email, password, name);
         set({
           user: {
-            id: userId,
+            id: userId,  // 'id' doit toujours être présent ici
             email,
             name,
           },

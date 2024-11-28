@@ -28,6 +28,7 @@ interface SpeakerDB extends DBSchema {
       password: string;
       name: string;
       createdAt: string;
+      updatedAt?: string; // Ajout de la propriété `updatedAt`
     };
     indexes: { 'by-email': string };
   };
@@ -147,7 +148,7 @@ export async function updateUser(userId: number, data: Partial<{ name: string; e
   return db.put('users', {
     ...user,
     ...data,
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString() // Mise à jour du champ `updatedAt`
   });
 }
 

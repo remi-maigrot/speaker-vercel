@@ -18,11 +18,9 @@ export function Marketplace() {
     queryKey: ['marketplace-listings'],
     queryFn: getMarketplaceListings,
     refetchInterval: 3000,
-    staleTime: 0,
-    cacheTime: 0,
   });
 
-  const filteredListings = listings.filter(listing => 
+  const filteredListings = listings.filter(listing =>
     listing.voice && // Check if voice exists
     listing.voice.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (voiceType === 'all' || listing.voice.type === voiceType)
@@ -118,7 +116,11 @@ export function Marketplace() {
                   <Button
                     variant="outline"
                     className="w-full mb-4"
-                    onClick={() => handlePlayPause(listing.id, listing.voice.audioUrl)}
+                    onClick={() => {
+                      if (listing.id && listing.voice?.audioUrl) {
+                        handlePlayPause(listing.id, listing.voice.audioUrl);
+                      }
+                    }}
                   >
                     {playingId === listing.id ? (
                       <>

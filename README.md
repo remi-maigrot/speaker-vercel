@@ -1,5 +1,11 @@
 # Speaker · AI Voice Studio (front-end prototype)
 
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=flat-square&logo=shadcnui&logoColor=white)
+
 Front-end prototype of **Speaker**, an AI voice product: users record or upload audio, edit it on a waveform with emotion sections, and publish voices to a marketplace.
 This repository contains the UI prototype only: there is no backend, data is stored in the browser (IndexedDB), and AI voice generation is simulated.
 
